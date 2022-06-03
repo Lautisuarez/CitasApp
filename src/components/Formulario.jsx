@@ -1,4 +1,6 @@
 import {useState, useEffect} from "react";
+// SweerAlert
+import swal from 'sweetalert';
 // COMPONENTES
 import Error from "./Error";
 
@@ -51,10 +53,14 @@ function Formulario({ pacientes, setPacientes, paciente, setPaciente }) {
             const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
             setPacientes(pacientesActualizados)
             setPaciente({}) // Limpiamos el state
+            // Mensaje de exito
+            swal("Correcto!", "Paciente editado con exito!", "success");
         } else {
             // Nuevo paciente
             objetoPaciente.id = generarId();
             setPacientes([...pacientes, objetoPaciente])
+            // Mensaje de exito
+            swal("Correcto!", "Paciente agregado con exito!", "success");
         }
 
         // Limpiamos los campos

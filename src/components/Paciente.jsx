@@ -1,11 +1,25 @@
+// SweerAlert
+import swal from 'sweetalert';
+
 function Paciente({ paciente, setPaciente, eliminarPaciente }) {
     const { nombreMascota, nombrePropietario, email, fechaAlta, sintomas, id} = paciente;
 
     const handleEliminar = () => {
-        const respuesta = confirm('Deseas eliminar el paciente?');
-        if (respuesta){
-            eliminarPaciente(id);
-        }
+        swal({
+            title: "Estas seguro?",
+            text: `Vas a eliminar al paciente ${nombrePropietario} y su mascota ${nombreMascota}`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                eliminarPaciente(id)
+                swal("Paciente eliminado con exito!", {
+                icon: "success",
+                });
+            }
+        });
     }
     return ( 
         <div className="ml-3 mb-3 mr-3 bg-white shadow-md px-5 py-10 rounded-xl">
